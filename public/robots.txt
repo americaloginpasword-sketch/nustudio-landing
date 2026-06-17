@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nustudio.ru/sitemap.xml

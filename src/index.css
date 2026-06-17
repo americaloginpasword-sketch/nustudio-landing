@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300;
+  src: url('/fonts/kanit-latin-300-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url('/fonts/kanit-latin-500-normal.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 900;
+  src: url('/fonts/kanit-latin-900-normal.woff2') format('woff2');
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  background-color: #0c0c0c;
+  font-family: 'Kanit', sans-serif;
+}
+
+.hero-heading {
+  background: linear-gradient(180deg, #646973 0%, #bbccd7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-heading-light {
+  background: linear-gradient(180deg, #505660 0%, #0c0c0c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-title {
+  font-size: clamp(3rem, 12vw, 160px);
+}
+
+.hero-title-fit {
+  display: inline-block;
+  max-width: 100%;
+  font-kerning: none;
+  letter-spacing: 0.015em;
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translate3d(var(--fade-x, 0), var(--fade-y, 30px), 0);
+}
+
+.fade-in--active {
+  animation: fade-in-up var(--fade-duration, 0.7s) cubic-bezier(0.25, 0.1, 0.25, 1) var(--fade-delay, 0s) forwards;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--fade-x, 0), var(--fade-y, 30px), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
