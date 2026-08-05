@@ -1,11 +1,18 @@
 export type VideoOrientation = 'horizontal' | 'vertical';
 
+export type KinescopeVideoCaption = {
+  heading: string;
+  text: string;
+  uppercaseHeading?: boolean;
+};
+
 export type KinescopeVideo = {
   id: string;
   title: string;
   /** Embed URL, popup.js URL, or video ID from Kinescope dashboard */
   embedSrc: string;
   orientation: VideoOrientation;
+  caption?: KinescopeVideoCaption;
 };
 
 export function parseKinescopeVideoId(input: string): string | null {
@@ -62,3 +69,7 @@ export function buildKinescopeEmbedSrc(embedSrc: string, autoplay = true): strin
 
 export const KINESCOPE_IFRAME_ALLOW =
   'autoplay; fullscreen; picture-in-picture; encrypted-media; gyroscope; accelerometer; clipboard-write; screen-wake-lock';
+
+/** Test embed — replace with real Kinescope links when ready */
+export const DEFAULT_KINESCope_EMBED =
+  'https://kinescope.io/qaTCCHBs9vZgCLuwDGHYwa/popup.js?aspect_ratio=16/9';

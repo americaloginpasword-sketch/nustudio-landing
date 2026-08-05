@@ -89,7 +89,7 @@ export default function KinescopeModal({ video, onClose }: KinescopeModalProps) 
             role="dialog"
             aria-modal="true"
             aria-label={video.title}
-            className={`relative z-10 w-[min(96vw,1200px)] md:w-[min(68vw,1200px)] ${getAspectClass(video.orientation)} max-h-[90vh]`}
+            className="relative z-10 w-[min(96vw,1200px)] md:w-[min(68vw,1200px)]"
             initial={{ opacity: 0, scale: 0.94, y: 16 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 8 }}
@@ -104,7 +104,9 @@ export default function KinescopeModal({ video, onClose }: KinescopeModalProps) 
               <X className="h-5 w-5" strokeWidth={1.75} />
             </button>
 
-            <div className="h-full w-full overflow-hidden rounded-[24px] border-2 border-[#D7E2EA] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)] sm:rounded-[32px]">
+            <div
+              className={`w-full overflow-hidden rounded-[24px] border-2 border-[#D7E2EA] bg-black shadow-[0_24px_80px_rgba(0,0,0,0.55)] sm:rounded-[32px] ${getAspectClass(video.orientation)} max-h-[min(90vh,720px)]`}
+            >
               <iframe
                 ref={iframeRef}
                 title={video.title}
@@ -114,6 +116,25 @@ export default function KinescopeModal({ video, onClose }: KinescopeModalProps) 
                 allowFullScreen
               />
             </div>
+
+            {video.caption ? (
+              <div className="mt-4 text-left sm:mt-5">
+                <p
+                  className={`hero-heading font-black leading-none tracking-tight ${
+                    video.caption.uppercaseHeading !== false ? 'uppercase' : ''
+                  }`}
+                  style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
+                >
+                  {video.caption.heading}
+                </p>
+                <p
+                  className="mt-2 font-light leading-snug text-[#D7E2EA] sm:mt-2.5"
+                  style={{ fontSize: 'clamp(0.875rem, 1.6vw, 1.125rem)' }}
+                >
+                  {video.caption.text}
+                </p>
+              </div>
+            ) : null}
           </motion.div>
         </motion.div>
       ) : null}

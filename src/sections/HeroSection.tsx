@@ -35,31 +35,28 @@ export default function HeroSection() {
           <HeroTitle text="NUstudio" />
         </div>
 
-        <FadeIn
-          delay={0.6}
-          y={30}
-          inView={false}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-10 w-[339px] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:w-[436px] sm:translate-y-0 sm:bottom-0 md:w-[532px] lg:w-[629px]"
-        >
-          <Magnet
-            padding={150}
-            strength={3}
-            activeTransition="transform 0.3s ease-out"
-            inactiveTransition="transform 0.6s ease-in-out"
-            className="pointer-events-auto"
-          >
-            <img
-              src={portrait}
-              alt="Портрет Jack"
-              className="h-auto w-full object-contain"
-              draggable={false}
-            />
-          </Magnet>
-        </FadeIn>
+        <div className="pointer-events-none absolute left-[60%] top-[60%] z-10 w-[410px] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:bottom-0 sm:w-[526px] sm:translate-y-[10vh] md:w-[643px] lg:w-[759px]">
+          <FadeIn delay={0.6} y={30} inView={false} className="h-full w-full">
+            <Magnet
+              padding={150}
+              strength={3}
+              activeTransition="transform 0.3s ease-out"
+              inactiveTransition="transform 0.6s ease-in-out"
+              className="pointer-events-auto"
+            >
+              <img
+                src={portrait}
+                alt="Портрет Jack"
+                className="h-auto w-full object-contain"
+                draggable={false}
+              />
+            </Magnet>
+          </FadeIn>
+        </div>
       </div>
 
       <div className={`relative z-20 flex items-end justify-between ${HERO_GUTTER} pb-7 sm:pb-8 md:pb-10`}>
-        <FadeIn delay={0.35} y={20} inView={false} className="pointer-events-none">
+        <FadeIn delay={0.35} y={20} inView={false} className="pointer-events-none ml-[0.8%]">
           <p
             className="max-w-[160px] cursor-default select-none font-light uppercase leading-snug tracking-wide text-[#D7E2EA] sm:max-w-[220px] md:max-w-[260px]"
             style={{ fontSize: 'clamp(0.75rem, 1.4vw, 1.5rem)' }}

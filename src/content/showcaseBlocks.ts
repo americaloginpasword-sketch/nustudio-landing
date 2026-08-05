@@ -1,4 +1,5 @@
 import { marqueeVideos } from '../assets/media';
+import { DEFAULT_KINESCope_EMBED } from '../lib/kinescope';
 import type { VideoOrientation, VideoSide } from '../types/showcase';
 
 export type VideoProjectInfo = {
@@ -18,8 +19,7 @@ export type ShowcaseBlock = {
   projectInfo?: VideoProjectInfo;
 };
 
-const TEST_KINESCope_EMBED =
-  'https://kinescope.io/qaTCCHBs9vZgCLuwDGHYwa/popup.js?aspect_ratio=16/9';
+const TEST_KINESCope_EMBED = DEFAULT_KINESCope_EMBED;
 
 export const SHOWCASE_BLOCKS: ShowcaseBlock[] = [
   {

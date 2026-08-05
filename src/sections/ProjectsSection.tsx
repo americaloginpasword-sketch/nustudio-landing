@@ -1,13 +1,19 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import FadeIn from '../components/FadeIn';
+import KinescopeModal from '../components/KinescopeModal';
 import LiveProjectButton from '../components/LiveProjectButton';
 import { projectImages } from '../assets/media';
+import { DEFAULT_KINESCope_EMBED, type KinescopeVideo, type KinescopeVideoCaption, type VideoOrientation } from '../lib/kinescope';
 
 type Project = {
   number: string;
   category: string;
   name: string;
+  uppercaseName?: boolean;
+  kinescopeEmbedSrc: string | null;
+  orientation?: VideoOrientation;
+  videoCaption: KinescopeVideoCaption;
   images: {
     col1Top: string;
     col1Bottom: string;
@@ -20,18 +26,35 @@ const PROJECTS: Project[] = [
     number: '01',
     category: 'Клиент',
     name: 'СБЕР',
+    kinescopeEmbedSrc: DEFAULT_KINESCope_EMBED,
+    videoCaption: {
+      heading: 'СБЕР',
+      text: 'Презентация продуктов и имиджевые ролики',
+    },
     images: projectImages.p1,
   },
   {
     number: '02',
     category: 'Клиент',
     name: 'НЦ "РОССИЯ"',
+    kinescopeEmbedSrc: DEFAULT_KINESCope_EMBED,
+    videoCaption: {
+      heading: 'НЦ "РОССИЯ"',
+      text: 'Контент для мероприятий и конференции',
+    },
     images: projectImages.p2,
   },
   {
     number: '03',
     category: 'Клиент',
-    name: 'Solaris Digital',
+    name: 'Девелопер GLORAX',
+    uppercaseName: false,
+    kinescopeEmbedSrc: DEFAULT_KINESCope_EMBED,
+    videoCaption: {
+      heading: 'Девелопер GLORAX',
+      text: 'Видеопрезентация девелоперского проекта',
+      uppercaseHeading: false,
+    },
     images: projectImages.p3,
   },
 ];
@@ -41,9 +64,10 @@ const TOTAL_CARDS = PROJECTS.length;
 type ProjectCardProps = {
   project: Project;
   index: number;
+  onOpenVideo: (project: Project) => void;
 };
 
-function ProjectCard({ project, index }: ProjectCardProps) {
+function ProjectCard({ project, index, onOpenVideo }: ProjectCardProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const targetScale = 1 - (TOTAL_CARDS - 1 - index) * 0.03;
 
@@ -53,6 +77,10 @@ function ProjectCard({ project, index }: ProjectCardProps) {
   });
 
   const scale = useTransform(scrollYProgress, [0, 1], [1, targetScale]);
+
+  const handleOpenVideo = () => {
+    onOpenVideo(project);
+  };
 
   return (
     <div
@@ -80,14 +108,17 @@ function ProjectCard({ project, index }: ProjectCardProps) {
                 {project.category}
               </span>
               <h3
-                className="font-medium uppercase text-[#D7E2EA]"
+                className={`font-medium text-[#D7E2EA] ${project.uppercaseName !== false ? 'uppercase' : ''}`}
                 style={{ fontSize: 'clamp(1rem, 2.2vw, 2.1rem)' }}
               >
                 {project.name}
               </h3>
             </div>
           </div>
-          <LiveProjectButton />
+          <LiveProjectButton
+            onClick={handleOpenVideo}
+            disabled={!project.kinescopeEmbedSrc}
+          />
         </div>
 
         <div className="flex items-stretch gap-3 sm:gap-4">
@@ -120,23 +151,46 @@ function ProjectCard({ project, index }: ProjectCardProps) {
 }
 
 export default function ProjectsSection() {
-  return (
-    <section
-      id="projects"
-      className="relative z-10 -mt-10 rounded-t-[40px] px-5 py-20 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 md:-mt-14 md:rounded-t-[60px] md:px-10"
-      style={{ backgroundColor: '#0C0C0C' }}
-    >
-      <FadeIn delay={0} y={40} className="mb-12 sm:mb-16 md:mb-20">
-        <h2 className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight">
-          НОВЫЕ ПРОЕКТЫ
-        </h2>
-      </FadeIn>
+  const [activeVideo, setActiveVideo] = useState<KinescopeVideo | null>(null);
 
-      <div className="relative mx-auto grid max-w-6xl gap-y-[50vh] pb-[10vh]">
-        {PROJECTS.map((project, index) => (
-          <ProjectCard key={project.number} project={project} index={index} />
-        ))}
-      </div>
-    </section>
+  const handleOpenVideo = (project: Project) => {
+    if (!project.kinescopeEmbedSrc) return;
+
+    setActiveVideo({
+      id: `project-${project.number}`,
+      title: project.name,
+      embedSrc: project.kinescopeEmbedSrc,
+      orientation: project.orientation ?? 'horizontal',
+      caption: project.videoCaption,
+    });
+  };
+
+  return (
+    <>
+      <section
+        id="projects"
+        className="relative z-10 -mt-10 rounded-t-[40px] px-5 pt-20 pb-10 sm:-mt-12 sm:rounded-t-[50px] sm:px-8 sm:pb-12 md:-mt-14 md:rounded-t-[60px] md:px-10 md:pb-14"
+        style={{ backgroundColor: '#0C0C0C' }}
+      >
+        <FadeIn delay={0} y={40} className="mb-12 sm:mb-16 md:mb-20">
+          <h2 className="hero-heading section-title text-center font-black uppercase leading-none tracking-tight">
+            НОВЫЕ ПРОЕКТЫ
+          </h2>
+        </FadeIn>
+
+        <div className="relative mx-auto grid max-w-6xl gap-y-[50vh] pb-[5vh]">
+          {PROJECTS.map((project, index) => (
+            <ProjectCard
+              key={project.number}
+              project={project}
+              index={index}
+              onOpenVideo={handleOpenVideo}
+            />
+          ))}
+        </div>
+      </section>
+
+      <KinescopeModal video={activeVideo} onClose={() => setActiveVideo(null)} />
+    </>
   );
 }

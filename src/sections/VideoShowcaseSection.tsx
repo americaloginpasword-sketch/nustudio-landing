@@ -80,7 +80,7 @@ function VideoBlock({
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[100vh] items-center px-5 py-16 sm:px-8 sm:py-20 md:px-10 md:py-24"
+      className="relative flex flex-col items-start px-5 sm:px-8 md:px-10"
     >
       <div className="relative mx-auto w-full">
         <motion.h2
@@ -150,7 +150,10 @@ export default function VideoShowcaseSection() {
 
   return (
     <>
-      <section className="relative z-10 overflow-x-clip" style={{ backgroundColor: '#0C0C0C' }}>
+      <section
+        className="relative z-10 flex flex-col gap-[clamp(3.75rem,16.5vh,9rem)] overflow-x-clip px-0 pb-16 pt-8 sm:pb-20 sm:pt-10 md:pb-24 md:pt-12"
+        style={{ backgroundColor: '#0C0C0C' }}
+      >
         {SHOWCASE_BLOCKS.map((block) => (
           <VideoBlock key={block.id} {...block} onOpenVideo={setActiveVideo} />
         ))}
