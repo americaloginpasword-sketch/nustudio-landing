@@ -66,6 +66,15 @@ body,
   letter-spacing: 0.015em;
 }
 
+.marquee-video::-webkit-media-controls {
+  display: none !important;
+}
+
+.marquee-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+}
+
 .fade-in {
   opacity: 0;
   transform: translate3d(var(--fade-x, 0), var(--fade-y, 30px), 0);

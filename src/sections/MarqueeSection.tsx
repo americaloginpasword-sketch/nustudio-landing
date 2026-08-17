@@ -18,9 +18,10 @@ function doubleItems(items: string[]) {
 type MarqueeVideoProps = {
   src: string;
   className?: string;
+  pauseWhenHidden?: boolean;
 };
 
-function MarqueeVideo({ src, className = '' }: MarqueeVideoProps) {
+function MarqueeVideo({ src, className = '', pauseWhenHidden = false }: MarqueeVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -30,6 +31,33 @@ function MarqueeVideo({ src, className = '' }: MarqueeVideoProps) {
     const tryPlay = () => {
       void video.play().catch(() => undefined);
     };
+
+    if (!pauseWhenHidden) {
+      video.preload = 'auto';
+      tryPlay();
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!entry.isIntersecting) return;
+
+          if (video.readyState === 0) {
+            video.load();
+          }
+
+          tryPlay();
+          observer.disconnect();
+        },
+        { rootMargin: '160px 0px' },
+      );
+
+      video.addEventListener('loadeddata', tryPlay);
+      observer.observe(video);
+
+      return () => {
+        video.removeEventListener('loadeddata', tryPlay);
+        observer.disconnect();
+      };
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -54,7 +82,7 @@ function MarqueeVideo({ src, className = '' }: MarqueeVideoProps) {
       video.removeEventListener('loadeddata', tryPlay);
       observer.disconnect();
     };
-  }, []);
+  }, [pauseWhenHidden]);
 
   return (
     <video
@@ -63,11 +91,11 @@ function MarqueeVideo({ src, className = '' }: MarqueeVideoProps) {
       muted
       loop
       playsInline
-      preload="none"
+      preload={pauseWhenHidden ? 'none' : 'auto'}
       controls={false}
       disablePictureInPicture
       disableRemotePlayback
-      className={`pointer-events-none shrink-0 object-cover ${className}`}
+      className={`marquee-video pointer-events-none shrink-0 object-cover ${className}`}
     >
       <source src={src} type="video/mp4" />
     </video>
@@ -122,6 +150,7 @@ export default function MarqueeSection() {
               <MarqueeVideo
                 key={src}
                 src={src}
+                pauseWhenHidden
                 className="aspect-video w-full rounded-xl"
               />
             ))}
