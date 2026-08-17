@@ -4,38 +4,56 @@ import { marqueeVideos } from '../assets/media';
 const ROW1 = marqueeVideos.slice(0, 4);
 const ROW2 = marqueeVideos.slice(4, 9);
 
+const MOBILE_ROWS = [
+  marqueeVideos.slice(0, 3),
+  marqueeVideos.slice(3, 5),
+  marqueeVideos.slice(5, 7),
+  marqueeVideos.slice(7, 9),
+] as const;
+
 function doubleItems(items: string[]) {
   return [...items, ...items];
 }
 
 type MarqueeVideoProps = {
   src: string;
+  className?: string;
 };
 
-function MarqueeVideo({ src }: MarqueeVideoProps) {
+function MarqueeVideo({ src, className = '' }: MarqueeVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    const tryPlay = () => {
+      void video.play().catch(() => undefined);
+    };
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
-
-        video.preload = 'auto';
-        if (video.readyState === 0) {
-          video.load();
+        if (entry.isIntersecting) {
+          video.preload = 'auto';
+          if (video.readyState === 0) {
+            video.load();
+          }
+          tryPlay();
+          return;
         }
 
-        void video.play().catch(() => undefined);
-        observer.disconnect();
+        video.pause();
       },
-      { rootMargin: '160px 0px' },
+      { rootMargin: '120px 0px', threshold: 0.15 },
     );
 
+    video.addEventListener('loadeddata', tryPlay);
     observer.observe(video);
-    return () => observer.disconnect();
+
+    return () => {
+      video.removeEventListener('loadeddata', tryPlay);
+      observer.disconnect();
+    };
   }, []);
 
   return (
@@ -46,7 +64,10 @@ function MarqueeVideo({ src }: MarqueeVideoProps) {
       loop
       playsInline
       preload="none"
-      className="pointer-events-none h-[270px] w-[420px] shrink-0 rounded-2xl object-cover"
+      controls={false}
+      disablePictureInPicture
+      disableRemotePlayback
+      className={`pointer-events-none shrink-0 object-cover ${className}`}
     >
       <source src={src} type="video/mp4" />
     </video>
@@ -87,18 +108,46 @@ export default function MarqueeSection() {
   return (
     <section
       ref={sectionRef}
-      className="flex flex-col gap-3 overflow-x-clip pb-10 pt-24 sm:pt-32 md:pt-40"
+      className="flex flex-col gap-2 overflow-x-clip pb-8 pt-16 sm:gap-3 sm:pb-10 sm:pt-24 md:pt-32 lg:pt-40"
       style={{ backgroundColor: '#0C0C0C' }}
     >
-      <div ref={row1Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
-        {doubleItems(ROW1).map((src, index) => (
-          <MarqueeVideo key={`row1-${src}-${index}`} src={src} />
+      <div className="flex flex-col gap-2 px-4 sm:hidden">
+        {MOBILE_ROWS.map((row, rowIndex) => (
+          <div
+            key={rowIndex}
+            className="grid gap-2"
+            style={{ gridTemplateColumns: `repeat(${row.length}, minmax(0, 1fr))` }}
+          >
+            {row.map((src) => (
+              <MarqueeVideo
+                key={src}
+                src={src}
+                className="aspect-video w-full rounded-xl"
+              />
+            ))}
+          </div>
         ))}
       </div>
-      <div ref={row2Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
-        {doubleItems(ROW2).map((src, index) => (
-          <MarqueeVideo key={`row2-${src}-${index}`} src={src} />
-        ))}
+
+      <div className="hidden flex-col gap-3 sm:flex">
+        <div ref={row1Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
+          {doubleItems(ROW1).map((src, index) => (
+            <MarqueeVideo
+              key={`row1-${src}-${index}`}
+              src={src}
+              className="h-[200px] w-[320px] rounded-2xl md:h-[270px] md:w-[420px]"
+            />
+          ))}
+        </div>
+        <div ref={row2Ref} className="flex gap-3" style={{ willChange: 'transform' }}>
+          {doubleItems(ROW2).map((src, index) => (
+            <MarqueeVideo
+              key={`row2-${src}-${index}`}
+              src={src}
+              className="h-[200px] w-[320px] rounded-2xl md:h-[270px] md:w-[420px]"
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
