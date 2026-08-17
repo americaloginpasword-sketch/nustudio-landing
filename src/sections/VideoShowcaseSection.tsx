@@ -1,24 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import KinescopeModal from '../components/KinescopeModal';
 import VideoPreviewCard from '../components/VideoPreviewCard';
 import { SHOWCASE_BLOCKS, type ShowcaseBlock, type VideoProjectInfo } from '../content/showcaseBlocks';
 import type { KinescopeVideo } from '../lib/kinescope';
-
-function useIsDesktopLayout() {
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const media = window.matchMedia('(min-width: 640px)');
-    const update = () => setIsDesktop(media.matches);
-
-    update();
-    media.addEventListener('change', update);
-    return () => media.removeEventListener('change', update);
-  }, []);
-
-  return isDesktop;
-}
 
 function VideoProjectCaption({
   client,
@@ -66,7 +51,6 @@ function VideoBlock({
 }: VideoBlockProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isVideoLeft = videoSide === 'left';
-  const isDesktopLayout = useIsDesktopLayout();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -100,9 +84,9 @@ function VideoBlock({
       <div className="relative mx-auto w-full">
         <motion.h2
           style={{
-            x: isDesktopLayout ? headingX : 0,
-            opacity: isDesktopLayout ? headingOpacity : 1,
-            willChange: isDesktopLayout ? 'transform, opacity' : undefined,
+            x: headingX,
+            opacity: headingOpacity,
+            willChange: 'transform, opacity',
           }}
           className={`hero-heading pointer-events-none relative z-10 mb-0 w-fit max-w-none font-black uppercase leading-[0.9] tracking-tight sm:mb-[clamp(-28px,-3.5vw,-52px)] ${
             isVideoLeft
