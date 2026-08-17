@@ -1,9 +1,24 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import KinescopeModal from '../components/KinescopeModal';
 import VideoPreviewCard from '../components/VideoPreviewCard';
 import { SHOWCASE_BLOCKS, type ShowcaseBlock, type VideoProjectInfo } from '../content/showcaseBlocks';
 import type { KinescopeVideo } from '../lib/kinescope';
+
+function useIsDesktopLayout() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(min-width: 640px)');
+    const update = () => setIsDesktop(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  return isDesktop;
+}
 
 function VideoProjectCaption({
   client,
@@ -51,7 +66,7 @@ function VideoBlock({
 }: VideoBlockProps) {
   const sectionRef = useRef<HTMLElement>(null);
   const isVideoLeft = videoSide === 'left';
-  const isTitleRight = isVideoLeft;
+  const isDesktopLayout = useIsDesktopLayout();
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -85,13 +100,14 @@ function VideoBlock({
       <div className="relative mx-auto w-full">
         <motion.h2
           style={{
-            x: headingX,
-            opacity: headingOpacity,
-            willChange: 'transform, opacity',
-            marginBottom: 'clamp(-28px, -3.5vw, -52px)',
+            x: isDesktopLayout ? headingX : 0,
+            opacity: isDesktopLayout ? headingOpacity : 1,
+            willChange: isDesktopLayout ? 'transform, opacity' : undefined,
           }}
-          className={`hero-heading pointer-events-none relative z-10 w-fit max-w-none font-black uppercase leading-[0.9] tracking-tight ${
-            isTitleRight ? 'ml-auto text-right' : 'mr-auto text-left'
+          className={`hero-heading pointer-events-none relative z-10 mb-0 w-fit max-w-none font-black uppercase leading-[0.9] tracking-tight sm:mb-[clamp(-28px,-3.5vw,-52px)] ${
+            isVideoLeft
+              ? 'mr-auto text-left sm:ml-auto sm:mr-0 sm:text-right'
+              : 'ml-auto text-right sm:mr-auto sm:ml-0 sm:text-left'
           }`}
         >
           <span
@@ -133,7 +149,7 @@ function VideoBlock({
         </div>
 
         {projectInfo ? (
-          <div className={`mt-6 sm:hidden ${isVideoLeft ? '' : 'flex justify-end'}`}>
+          <div className={`mt-4 sm:hidden ${isVideoLeft ? '' : 'flex justify-end'}`}>
             <VideoProjectCaption
               {...projectInfo}
               align={isVideoLeft ? 'left' : 'right'}
@@ -151,7 +167,7 @@ export default function VideoShowcaseSection() {
   return (
     <>
       <section
-        className="relative z-10 flex flex-col gap-[clamp(3.75rem,16.5vh,9rem)] overflow-x-clip px-0 pb-16 pt-8 sm:pb-20 sm:pt-10 md:pb-24 md:pt-12"
+        className="relative z-10 flex flex-col gap-10 overflow-x-clip px-0 pb-10 pt-6 sm:gap-[clamp(2.5rem,12vh,7rem)] sm:pb-16 sm:pt-8 md:gap-[clamp(3.75rem,16.5vh,9rem)] md:pb-24 md:pt-12"
         style={{ backgroundColor: '#0C0C0C' }}
       >
         {SHOWCASE_BLOCKS.map((block) => (
