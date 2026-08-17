@@ -35,7 +35,7 @@ export default function HeroSection() {
           <HeroTitle text="NUstudio" />
         </div>
 
-        <div className="pointer-events-none absolute bottom-0 right-[-8%] z-10 w-[min(78vw,300px)] translate-y-[4vh] sm:left-[60%] sm:right-auto sm:w-[526px] sm:-translate-x-1/2 sm:translate-y-[10vh] md:w-[643px] lg:w-[759px]">
+        <div className="pointer-events-none absolute left-1/2 top-[54%] z-10 w-[min(88vw,320px)] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:left-[60%] sm:bottom-0 sm:w-[526px] sm:-translate-x-1/2 sm:translate-y-[10vh] md:w-[643px] lg:w-[759px]">
           <FadeIn delay={0.6} y={30} inView={false} className="h-full w-full">
             <Magnet
               padding={150}
