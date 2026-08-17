@@ -1,5 +1,6 @@
 import FadeIn from '../components/FadeIn';
 import ContactButton from '../components/ContactButton';
+import { CONTACT_EMAIL, CONTACT_MAILTO, CONTACT_TELEGRAM_URL } from '../content/contacts';
 
 const NAV_LINKS = [
   { label: 'О СТУДИИ', href: '#about' },
@@ -59,13 +60,13 @@ export default function FooterSection() {
                 Контакты
               </span>
               <a
-                href="mailto:hello@nustudio.ru"
+                href={CONTACT_MAILTO}
                 className="text-sm font-light text-[#D7E2EA]/80 transition-opacity duration-200 hover:text-[#D7E2EA] md:text-base"
               >
-                hello@nustudio.ru
+                {CONTACT_EMAIL}
               </a>
               <a
-                href="https://t.me/nustudio"
+                href={CONTACT_TELEGRAM_URL}
                 target="_blank"
                 rel="noreferrer"
                 className="text-sm font-light text-[#D7E2EA]/80 transition-opacity duration-200 hover:text-[#D7E2EA] md:text-base"
