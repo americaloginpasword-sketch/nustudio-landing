@@ -2,7 +2,7 @@ import FadeIn from '../components/FadeIn';
 import ContactButton from '../components/ContactButton';
 import HeroTitle from '../components/HeroTitle';
 import Magnet from '../components/Magnet';
-import portrait from '../assets/portrait.webp';
+import { HERO_PORTRAIT_PATH } from '../content/videoPosters';
 
 const NAV_LINKS = [
   { label: 'О СТУДИИ', href: '#about' },
@@ -32,22 +32,29 @@ export default function HeroSection() {
 
       <div className={`relative flex min-h-0 flex-1 flex-col ${HERO_GUTTER}`}>
         <div className="pointer-events-none relative z-0 mt-4 shrink-0 sm:mt-4 md:-mt-5">
-          <HeroTitle text="NUstudio" />
+          <HeroTitle
+            text="NUstudio"
+            seoSuffix=" — студия нейросетевого видео и AI-контента"
+          />
         </div>
 
-        <div className="pointer-events-none absolute left-1/2 top-[54%] z-10 w-[min(88vw,320px)] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:left-[60%] sm:bottom-0 sm:w-[526px] sm:-translate-x-1/2 sm:translate-y-[10vh] md:w-[643px] lg:w-[759px]">
+        <div className="pointer-events-none absolute left-1/2 top-[54%] z-10 aspect-[10/11] w-[min(88vw,320px)] -translate-x-1/2 -translate-y-1/2 sm:top-auto sm:left-[60%] sm:bottom-0 sm:w-[526px] sm:-translate-x-1/2 sm:translate-y-[10vh] md:w-[643px] lg:w-[759px]">
           <FadeIn delay={0.6} y={30} inView={false} className="h-full w-full">
             <Magnet
               padding={150}
               strength={3}
               activeTransition="transform 0.3s ease-out"
               inactiveTransition="transform 0.6s ease-in-out"
-              className="pointer-events-auto"
+              className="pointer-events-auto h-full w-full"
             >
               <img
-                src={portrait}
-                alt="Портрет Jack"
-                className="h-auto w-full object-contain"
+                src={HERO_PORTRAIT_PATH}
+                alt="Портрет продюсера NUstudio — студия нейросетевого видео и AI-контента"
+                width={1000}
+                height={1100}
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full object-contain"
                 draggable={false}
               />
             </Magnet>

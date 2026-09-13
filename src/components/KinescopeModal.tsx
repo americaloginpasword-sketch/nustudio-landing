@@ -111,6 +111,7 @@ export default function KinescopeModal({ video, onClose }: KinescopeModalProps) 
                 ref={iframeRef}
                 title={video.title}
                 src={iframeSrc}
+                loading="lazy"
                 className="h-full w-full"
                 allow={KINESCOPE_IFRAME_ALLOW}
                 allowFullScreen
@@ -119,14 +120,14 @@ export default function KinescopeModal({ video, onClose }: KinescopeModalProps) 
 
             {video.caption ? (
               <div className="mt-4 text-left sm:mt-5">
-                <p
+                <h3
                   className={`hero-heading font-black leading-none tracking-tight ${
                     video.caption.uppercaseHeading !== false ? 'uppercase' : ''
                   }`}
                   style={{ fontSize: 'clamp(1.25rem, 3vw, 2rem)' }}
                 >
                   {video.caption.heading}
-                </p>
+                </h3>
                 <p
                   className="mt-2 font-light leading-snug text-[#D7E2EA] sm:mt-2.5"
                   style={{ fontSize: 'clamp(0.875rem, 1.6vw, 1.125rem)' }}

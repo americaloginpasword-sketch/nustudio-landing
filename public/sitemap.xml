@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
   <url>
     <loc>https://nustudio.ru/</loc>
-    <lastmod>2026-06-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/showcase-commerce.jpg</video:thumbnail_loc>
+      <video:title>AI-имиджевый ролик: презентация продуктов (MARKETING)</video:title>
+      <video:description>Нейросетевой имиджевый ролик для маркетинговых задач: презентация продуктов с реализмом, липсинком, локациями и людьми.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-03-15</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/showcase-event.jpg</video:thumbnail_loc>
+      <video:title>AI-ролик открытия конференции в НЦ «Россия» (EVENT)</video:title>
+      <video:description>AI-контент для мероприятий: интро, заставки спикеров, афиши и маскот для конференции в НЦ «Россия».</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-04-10</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/showcase-advertising.jpg</video:thumbnail_loc>
+      <video:title>AI-рекламный ролик: презентация продуктов (PROMO)</video:title>
+      <video:description>Нейросетевой рекламный ролик для промо-кампаний: презентация продуктов с реализмом, липсинком, локациями и людьми.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-05-01</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/showcase-marketing.jpg</video:thumbnail_loc>
+      <video:title>AI-ролик для соцсетей: Reels и Stories для брендов</video:title>
+      <video:description>Вертикальный AI-контент для соцсетей: Reels и Stories для брендов с трендовыми форматами, липсинком и эффектами.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-05-20</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/project-sber.webp</video:thumbnail_loc>
+      <video:title>AI-имиджевый ролик для Сбера: презентация продуктов</video:title>
+      <video:description>Нейросетевой имиджевый ролик для Сбера: презентация продуктов и имиджевые видеоматериалы для бренда.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-06-12</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/project-russia.webp</video:thumbnail_loc>
+      <video:title>AI-ролик для мероприятий: конференция в НЦ «Россия»</video:title>
+      <video:description>AI-видеоконтент для мероприятий и конференции в НЦ «Россия»: интро, заставки и визуальное сопровождение события.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-07-08</video:publication_date>
+    </video:video>
+    <video:video>
+      <video:thumbnail_loc>https://nustudio.ru/schema/thumbnails/project-glorax.webp</video:thumbnail_loc>
+      <video:title>AI-видеопрезентация девелоперского проекта GLORAX</video:title>
+      <video:description>Нейросетевой видеоролик для девелопера GLORAX: видеопрезентация девелоперского проекта с акцентом на архитектуру и атмосферу.</video:description>
+      <video:player_loc>https://kinescope.io/embed/qaTCCHBs9vZgCLuwDGHYwa</video:player_loc>
+      <video:publication_date>2025-08-22</video:publication_date>
+    </video:video>
   </url>
 </urlset>

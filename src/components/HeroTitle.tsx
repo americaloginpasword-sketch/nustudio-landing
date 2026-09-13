@@ -2,9 +2,10 @@ import { useLayoutEffect, useRef } from 'react';
 
 type HeroTitleProps = {
   text: string;
+  seoSuffix?: string;
 };
 
-export default function HeroTitle({ text }: HeroTitleProps) {
+export default function HeroTitle({ text, seoSuffix }: HeroTitleProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -51,6 +52,7 @@ export default function HeroTitle({ text }: HeroTitleProps) {
         className="hero-heading hero-title-fit cursor-default select-none whitespace-nowrap text-left font-black leading-none"
       >
         {text}
+        {seoSuffix ? <span className="sr-only">{seoSuffix}</span> : null}
       </h1>
     </div>
   );

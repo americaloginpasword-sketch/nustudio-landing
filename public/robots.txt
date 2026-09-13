@@ -1,4 +1,20 @@
 User-agent: *
 Allow: /
 
+# Явно разрешены статические ресурсы сайта
+Allow: /favicon
+Allow: /apple-touch-icon
+Allow: /og-image.jpg
+Allow: /schema/
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.woff2$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.mp4$
+
 Sitemap: https://nustudio.ru/sitemap.xml

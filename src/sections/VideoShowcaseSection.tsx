@@ -19,12 +19,12 @@ function VideoProjectCaption({
         isRight ? 'items-end text-right' : 'items-start text-left'
       }`}
     >
-      <p
+      <h3
         className="hero-heading whitespace-pre-line font-black uppercase leading-none tracking-tight"
         style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)' }}
       >
         {client}
-      </p>
+      </h3>
       <p className="mt-2 whitespace-nowrap text-sm font-light leading-snug text-[#D7E2EA] sm:mt-3 sm:text-base md:text-lg">
         {description}
       </p>
@@ -41,6 +41,9 @@ type VideoBlockProps = ShowcaseBlock & {
 
 function VideoBlock({
   title,
+  headingKeywords,
+  previewAlt,
+  posterPath,
   videoSide,
   orientation,
   previewSrc,
@@ -78,6 +81,7 @@ function VideoBlock({
 
   return (
     <section
+      id={id}
       ref={sectionRef}
       className="relative flex flex-col items-start px-5 sm:px-8 md:px-10"
     >
@@ -111,8 +115,10 @@ function VideoBlock({
           >
             <VideoPreviewCard
               previewSrc={previewSrc}
+              previewAlt={previewAlt}
+              poster={posterPath}
               orientation={orientation}
-              title={title}
+              title={`${title}${headingKeywords}`}
               disabled={!kinescopeEmbedSrc}
               onClick={handleOpenVideo}
             />

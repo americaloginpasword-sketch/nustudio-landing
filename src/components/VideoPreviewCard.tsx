@@ -1,8 +1,11 @@
 import { Play } from 'lucide-react';
+import LazyVideo from './LazyVideo';
 import type { VideoOrientation } from '../types/showcase';
 
 type VideoPreviewCardProps = {
   previewSrc: string;
+  previewAlt: string;
+  poster: string;
   orientation: VideoOrientation;
   title: string;
   disabled?: boolean;
@@ -17,6 +20,8 @@ function getFrameClass(orientation: VideoOrientation) {
 
 export default function VideoPreviewCard({
   previewSrc,
+  previewAlt,
+  poster,
   orientation,
   title,
   disabled = false,
@@ -30,16 +35,12 @@ export default function VideoPreviewCard({
       onClick={onClick}
       className={`group relative overflow-hidden rounded-[40px] border-2 border-[#D7E2EA] bg-[#0C0C0C] text-left transition-transform duration-300 hover:scale-[1.01] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#D7E2EA] disabled:cursor-not-allowed disabled:opacity-60 sm:rounded-[50px] md:rounded-[60px] ${getFrameClass(orientation)}`}
     >
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
+      <LazyVideo
+        src={previewSrc}
+        poster={poster}
+        label={previewAlt}
         className="pointer-events-none block h-full w-full object-cover"
-      >
-        <source src={previewSrc} type="video/mp4" />
-      </video>
+      />
 
       <span className="absolute inset-0 bg-black/20 transition-colors duration-300 group-hover:bg-black/35 group-disabled:bg-black/20" />
 

@@ -1,7 +1,7 @@
-import moon from './about/moon.png';
-import object3d from './about/object3d.png';
-import lego from './about/lego.png';
-import group from './about/group.png';
+import moon from './about/moon.webp';
+import object3d from './about/object3d.webp';
+import lego from './about/lego.webp';
+import group from './about/group.webp';
 
 import marquee01 from './marquee/01.mp4';
 import marquee02 from './marquee/02.mp4';

@@ -19,6 +19,16 @@ type Project = {
     col1Bottom: string;
     col2: string;
   };
+  imageAlts: {
+    col1Top: string;
+    col1Bottom: string;
+    col2: string;
+  };
+  imageSizes: {
+    col1Top: { width: number; height: number };
+    col1Bottom: { width: number; height: number };
+    col2: { width: number; height: number };
+  };
 };
 
 const PROJECTS: Project[] = [
@@ -32,6 +42,16 @@ const PROJECTS: Project[] = [
       text: 'Презентация продуктов и имиджевые ролики',
     },
     images: projectImages.p1,
+    imageAlts: {
+      col1Top: 'AI-имиджевый ролик для Сбера — кадр презентации продукта',
+      col1Bottom: 'AI-имиджевый ролик для Сбера — имиджевая сцена для бренда',
+      col2: 'AI-имиджевый ролик для Сбера — ключевой кадр рекламного ролика',
+    },
+    imageSizes: {
+      col1Top: { width: 3358, height: 1878 },
+      col1Bottom: { width: 3360, height: 1884 },
+      col2: { width: 3358, height: 1864 },
+    },
   },
   {
     number: '02',
@@ -43,6 +63,16 @@ const PROJECTS: Project[] = [
       text: 'Контент для мероприятий и конференции',
     },
     images: projectImages.p2,
+    imageAlts: {
+      col1Top: 'AI-ролик для ивента — кадр интро конференции в НЦ «Россия»',
+      col1Bottom: 'AI-ролик для мероприятия — заставка спикера конференции',
+      col2: 'AI-ролик для ивента — визуальный контент конференции в НЦ «Россия»',
+    },
+    imageSizes: {
+      col1Top: { width: 6336, height: 2688 },
+      col1Bottom: { width: 6336, height: 2688 },
+      col2: { width: 6336, height: 2688 },
+    },
   },
   {
     number: '03',
@@ -56,6 +86,16 @@ const PROJECTS: Project[] = [
       uppercaseHeading: false,
     },
     images: projectImages.p3,
+    imageAlts: {
+      col1Top: 'AI-видеопрезентация GLORAX — архитектурный кадр девелоперского проекта',
+      col1Bottom: 'AI-видеопрезентация GLORAX — атмосферная сцена жилого комплекса',
+      col2: 'AI-видеопрезентация GLORAX — ключевой кадр промо-ролика девелопера',
+    },
+    imageSizes: {
+      col1Top: { width: 3360, height: 1890 },
+      col1Bottom: { width: 3356, height: 1882 },
+      col2: { width: 3360, height: 1894 },
+    },
   },
 ];
 
@@ -128,19 +168,31 @@ function ProjectCard({ project, index, onOpenVideo }: ProjectCardProps) {
           >
             <img
               src={project.images.col1Top}
-              alt=""
+              alt={project.imageAlts.col1Top}
+              width={project.imageSizes.col1Top.width}
+              height={project.imageSizes.col1Top.height}
+              loading="lazy"
+              decoding="async"
               className="w-full shrink-0 rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]"
               style={{ height: 'clamp(130px, 16vw, 230px)' }}
             />
             <img
               src={project.images.col1Bottom}
-              alt=""
+              alt={project.imageAlts.col1Bottom}
+              width={project.imageSizes.col1Bottom.width}
+              height={project.imageSizes.col1Bottom.height}
+              loading="lazy"
+              decoding="async"
               className="min-h-0 w-full flex-1 rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]"
             />
           </div>
           <img
             src={project.images.col2}
-            alt=""
+            alt={project.imageAlts.col2}
+            width={project.imageSizes.col2.width}
+            height={project.imageSizes.col2.height}
+            loading="lazy"
+            decoding="async"
             className="w-[60%] shrink-0 rounded-[40px] object-cover sm:rounded-[50px] md:rounded-[60px]"
             style={{ height: 'clamp(300px, 38vw, 570px)' }}
           />

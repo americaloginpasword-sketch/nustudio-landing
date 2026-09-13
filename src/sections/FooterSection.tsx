@@ -11,6 +11,9 @@ const NAV_LINKS = [
 
 const FOOTER_GUTTER = 'px-6 md:px-10';
 
+const FOOTER_SEO_TEXT =
+  'NUstudio — студия AI-видеопродакшна. Делаем нейросетевые видео на заказ: рекламные ролики для брендов и соцсетей, открывающие интро и мотивационные ролики для ивентов, анонсы запусков, обложки музыкальных синглов, раскадровки и визуальные концепции. Также занимаемся внедрением нейросетей: AI-агенты, автоматизация и консалтинг.';
+
 export default function FooterSection() {
   const year = new Date().getFullYear();
 
@@ -76,6 +79,12 @@ export default function FooterSection() {
             </div>
           </FadeIn>
         </div>
+
+        <FadeIn delay={0.15} className="mt-12 sm:mt-14">
+          <p className="max-w-3xl text-sm font-light leading-relaxed text-[#D7E2EA]/50">
+            {FOOTER_SEO_TEXT}
+          </p>
+        </FadeIn>
 
         <FadeIn
           delay={0.2}
