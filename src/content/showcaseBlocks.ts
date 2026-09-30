@@ -24,6 +24,8 @@ export type ShowcaseBlock = {
 
 const TEST_KINESCope_EMBED = DEFAULT_KINESCope_EMBED;
 
+export const EVENT_KINESCope_EMBED = 'https://kinescope.io/bjpZF1fSd8YUP4oxoAGL5h/pltg9rTa';
+
 export const SHOWCASE_BLOCKS: ShowcaseBlock[] = [
   {
     id: 'commerce',
@@ -50,7 +52,7 @@ export const SHOWCASE_BLOCKS: ShowcaseBlock[] = [
     videoSide: 'right',
     orientation: 'horizontal',
     previewSrc: marqueeVideos[1],
-    kinescopeEmbedSrc: TEST_KINESCope_EMBED,
+    kinescopeEmbedSrc: EVENT_KINESCope_EMBED,
     projectInfo: {
       client: 'КОНТЕНТ ДЛЯ\nМЕРОПРИЯТИЙ',
       description: 'Конференция в НЦ "Россия"',

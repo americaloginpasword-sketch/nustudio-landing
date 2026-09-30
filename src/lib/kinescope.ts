@@ -24,6 +24,9 @@ export function parseKinescopeVideoId(input: string): string | null {
   const embedMatch = trimmed.match(/kinescope\.io\/embed\/([^/?#]+)/i);
   if (embedMatch?.[1]) return embedMatch[1];
 
+  const shareMatch = trimmed.match(/kinescope\.io\/([^/?#]+)\/([a-zA-Z0-9_-]+)\/?(?:[?#]|$)/i);
+  if (shareMatch?.[1] && shareMatch[2] !== 'popup.js') return shareMatch[1];
+
   return null;
 }
 
@@ -43,6 +46,13 @@ export function parseKinescopeEmbedSrc(input: string): string {
   const embedMatch = trimmed.match(/(https:\/\/kinescope\.io\/embed\/[^/?#\s"']+)/i);
   if (embedMatch?.[1]) {
     return embedMatch[1];
+  }
+
+  const shareMatch = trimmed.match(
+    /https?:\/\/(?:www\.)?kinescope\.io\/([^/?#\s"']+)\/([a-zA-Z0-9_-]+)\/?(?:[?#][^"'\s]*)?/i,
+  );
+  if (shareMatch?.[1] && shareMatch[2] !== 'popup.js') {
+    return `https://kinescope.io/embed/${shareMatch[1]}`;
   }
 
   if (trimmed.startsWith('http')) {

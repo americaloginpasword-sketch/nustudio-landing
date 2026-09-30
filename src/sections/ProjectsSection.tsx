@@ -57,7 +57,7 @@ const PROJECTS: Project[] = [
     number: '02',
     category: 'Клиент',
     name: 'НЦ "РОССИЯ"',
-    kinescopeEmbedSrc: DEFAULT_KINESCope_EMBED,
+    kinescopeEmbedSrc: 'https://kinescope.io/embed/6bbuunNGi27eYUSoq9qfKw',
     videoCaption: {
       heading: 'НЦ "РОССИЯ"',
       text: 'Контент для мероприятий и конференции',

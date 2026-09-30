@@ -1,4 +1,5 @@
 import { CONTACT_EMAIL, CONTACT_TELEGRAM_URL } from './contacts';
+import { EVENT_KINESCope_EMBED } from './showcaseBlocks';
 import { buildKinescopeEmbedSrc, DEFAULT_KINESCope_EMBED } from '../lib/kinescope';
 
 /** Добавьте ссылки на соцсети NUstudio для поля Organization.sameAs */
@@ -35,7 +36,7 @@ export const PORTFOLIO_VIDEOS: PortfolioVideoSchema[] = [
       'AI-контент для мероприятий: интро, заставки спикеров, афиши и маскот для конференции в НЦ «Россия».',
     thumbnailPath: '/schema/thumbnails/showcase-event.jpg',
     uploadDate: '2025-04-10',
-    embedSrc: DEFAULT_KINESCope_EMBED,
+    embedSrc: EVENT_KINESCope_EMBED,
   },
   {
     id: 'showcase-advertising',
