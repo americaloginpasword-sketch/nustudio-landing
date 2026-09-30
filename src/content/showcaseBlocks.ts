@@ -1,5 +1,5 @@
 import { marqueeVideos } from '../assets/media';
-import { DEFAULT_KINESCope_EMBED } from '../lib/kinescope';
+import { DEFAULT_KINESCope_EMBED, EVENT_KINESCope_EMBED } from '../lib/kinescope';
 import type { VideoOrientation, VideoSide } from '../types/showcase';
 
 export type VideoProjectInfo = {
@@ -23,8 +23,6 @@ export type ShowcaseBlock = {
 };
 
 const TEST_KINESCope_EMBED = DEFAULT_KINESCope_EMBED;
-
-export const EVENT_KINESCope_EMBED = 'https://kinescope.io/bjpZF1fSd8YUP4oxoAGL5h/pltg9rTa';
 
 export const SHOWCASE_BLOCKS: ShowcaseBlock[] = [
   {

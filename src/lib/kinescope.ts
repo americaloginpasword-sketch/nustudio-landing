@@ -83,3 +83,5 @@ export const KINESCOPE_IFRAME_ALLOW =
 /** Test embed — replace with real Kinescope links when ready */
 export const DEFAULT_KINESCope_EMBED =
   'https://kinescope.io/qaTCCHBs9vZgCLuwDGHYwa/popup.js?aspect_ratio=16/9';
+
+export const EVENT_KINESCope_EMBED = 'https://kinescope.io/bjpZF1fSd8YUP4oxoAGL5h/pltg9rTa';

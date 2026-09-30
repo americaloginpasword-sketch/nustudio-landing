@@ -1,6 +1,5 @@
 import { CONTACT_EMAIL, CONTACT_TELEGRAM_URL } from './contacts';
-import { EVENT_KINESCope_EMBED } from './showcaseBlocks';
-import { buildKinescopeEmbedSrc, DEFAULT_KINESCope_EMBED } from '../lib/kinescope';
+import { buildKinescopeEmbedSrc, DEFAULT_KINESCope_EMBED, EVENT_KINESCope_EMBED } from '../lib/kinescope';
 
 /** Добавьте ссылки на соцсети NUstudio для поля Organization.sameAs */
 export const ORGANIZATION_SAME_AS = [CONTACT_TELEGRAM_URL] as const;
