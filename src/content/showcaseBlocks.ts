@@ -53,7 +53,7 @@ export const SHOWCASE_BLOCKS: ShowcaseBlock[] = [
     kinescopeEmbedSrc: EVENT_KINESCope_EMBED,
     projectInfo: {
       client: 'КОНТЕНТ ДЛЯ\nМЕРОПРИЯТИЙ',
-      description: 'Конференция в НЦ "Россия"',
+      description: 'Корпоративные ролики',
       tags: 'Интро / Заставки спикеров / Афиши / Маскот',
     },
   },

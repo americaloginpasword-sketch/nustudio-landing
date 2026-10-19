@@ -1,7 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef, useState } from 'react';
-import KinescopeModal from '../components/KinescopeModal';
+import { useRef } from 'react';
 import VideoPreviewCard from '../components/VideoPreviewCard';
+import { useShowcaseVideoDeepLink } from '../hooks/useShowcaseVideoDeepLink';
 import { SHOWCASE_BLOCKS, type ShowcaseBlock, type VideoProjectInfo } from '../content/showcaseBlocks';
 import type { KinescopeVideo } from '../lib/kinescope';
 
@@ -152,20 +152,16 @@ function VideoBlock({
 }
 
 export default function VideoShowcaseSection() {
-  const [activeVideo, setActiveVideo] = useState<KinescopeVideo | null>(null);
+  const { openVideo } = useShowcaseVideoDeepLink();
 
   return (
-    <>
-      <section
-        className="relative z-10 flex flex-col gap-10 overflow-x-clip px-0 pb-10 pt-6 sm:gap-[clamp(2.5rem,12vh,7rem)] sm:pb-16 sm:pt-8 md:gap-[clamp(3.75rem,16.5vh,9rem)] md:pb-24 md:pt-12"
-        style={{ backgroundColor: '#0C0C0C' }}
-      >
-        {SHOWCASE_BLOCKS.map((block) => (
-          <VideoBlock key={block.id} {...block} onOpenVideo={setActiveVideo} />
-        ))}
-      </section>
-
-      <KinescopeModal video={activeVideo} onClose={() => setActiveVideo(null)} />
-    </>
+    <section
+      className="relative z-10 flex flex-col gap-10 overflow-x-clip px-0 pb-10 pt-6 sm:gap-[clamp(2.5rem,12vh,7rem)] sm:pb-16 sm:pt-8 md:gap-[clamp(3.75rem,16.5vh,9rem)] md:pb-24 md:pt-12"
+      style={{ backgroundColor: '#0C0C0C' }}
+    >
+      {SHOWCASE_BLOCKS.map((block) => (
+        <VideoBlock key={block.id} {...block} onOpenVideo={openVideo} />
+      ))}
+    </section>
   );
 }
