@@ -1,8 +1,9 @@
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
-import { writeFileSync } from 'node:fs'
+import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { buildStructuredDataJsonLd, buildSitemapXml } from './src/content/structuredData'
+import { getShowcaseVideoSharePathnames } from './src/lib/videoDeepLinks'
 
 function injectJsonLdPlugin(): Plugin {
   return {
@@ -28,9 +29,26 @@ function generateSitemapPlugin(): Plugin {
   }
 }
 
+function copyShowcaseShareRoutesPlugin(): Plugin {
+  return {
+    name: 'copy-showcase-share-routes',
+    writeBundle(options) {
+      const outDir = options.dir ?? 'dist'
+      const indexPath = join(outDir, 'index.html')
+
+      for (const pathname of getShowcaseVideoSharePathnames()) {
+        const segments = pathname.split('/').filter(Boolean)
+        const targetDir = join(outDir, ...segments)
+        mkdirSync(targetDir, { recursive: true })
+        copyFileSync(indexPath, join(targetDir, 'index.html'))
+      }
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), injectJsonLdPlugin(), generateSitemapPlugin()],
+  plugins: [react(), injectJsonLdPlugin(), generateSitemapPlugin(), copyShowcaseShareRoutesPlugin()],
   server: {
     host: true,
     port: 3000,

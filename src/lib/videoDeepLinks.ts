@@ -41,3 +41,8 @@ export function getSharePathForShowcaseVideoId(videoId: string): string | null {
   const link = SHOWCASE_VIDEO_DEEP_LINKS.find((entry) => entry.video.id === videoId);
   return link?.pathname ?? null;
 }
+
+/** Пути, для которых при сборке кладём копию index.html (HTTP 200 на GitHub Pages) */
+export function getShowcaseVideoSharePathnames(): string[] {
+  return SHOWCASE_VIDEO_DEEP_LINKS.map((link) => link.pathname);
+}
